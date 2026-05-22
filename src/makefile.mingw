@@ -94,7 +94,7 @@ OBJS= \
     obj/cryptogram.o \
     obj/ipcollector.o
 
-all: novacoind.exe
+all: deadcoind.exe
 
 #
 # LevelDB support
@@ -150,11 +150,11 @@ endif
 obj/%.o: %.cpp $(HEADERS)
 	g++ -c $(CFLAGS) -o $@ $<
 
-novacoind.exe: $(OBJS:obj/%=obj/%)
+deadcoind.exe: $(OBJS:obj/%=obj/%)
 	g++ $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 clean:
-	-del /Q novacoind.exe
+	-del /Q deadcoind.exe
 	-del /Q obj\*
 	-del /Q crypto\scrypt\asm\obj\*
 

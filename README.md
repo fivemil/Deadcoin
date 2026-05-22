@@ -1,41 +1,31 @@
+Deadcoin bootstrap tree
+======================
 
-NovaCoin official development tree
+Deadcoin is being revived from this historical NovaCoin-derived codebase as a separate network bootstrap. This update starts that work by giving the project its own runtime identity and by stopping automatic peer discovery from the legacy NovaCoin network.
 
-NovaCoin - a hybrid scrypt PoW + PoS based cryptocurrency.
+Current bootstrap changes
+-------------------------
 
-* 10 minutes stake spacing
-* 30 minutes PoW spacing
-* Balanced PoW blocks and stakes weighting
-* The PoW subsidy halves every x64 multiply of PoW difficulty
-* The PoS interest halves every x64 multiply of PoS difficulty
-* Maximum PoW reward is 100 coins
-* Maximum PoS reward is 10 coins
-* No deterministic limit of the supply, currently ~ 1411259 coins mined
+* default binaries now build as `deadcoind` and `deadcoin-qt`
+* runtime defaults now use Deadcoin names for the app, data directory, config file, pid file, and URI scheme
+* bootstrap networking now uses Deadcoin-specific message magic and ports
+* automatic DNS/IRC seeding is disabled by default until dedicated Deadcoin bootstrap infrastructure exists
+* compiled checkpoints are reduced to genesis so the chain can diverge from legacy NovaCoin history
 
-Development process
-===========================
+Build
+-----
 
-Developers work in their own trees, then submit pull requests when
-they think their feature or bug fix is ready.
+Headless daemon build entrypoint:
 
-The patch will be accepted if there is broad consensus that it is a
-good thing.  Developers should expect to rework and resubmit patches
-if they don't match the project's coding conventions (see coding.txt)
-or are controversial.
+    cd /home/runner/work/Deadcoin/Deadcoin/src
+    make -f makefile.unix
 
-The master branch is regularly built and tested, but is not guaranteed
-to be completely stable. Tags are regularly created to indicate new
-official, stable release versions of NovaCoin.
+The current sandbox does not include the legacy Boost/Berkeley DB development packages required by this codebase, so the build stops early until those dependencies are installed.
 
-Feature branches are created when there are major new features being
-worked on by several people.
+Next bootstrap work
+-------------------
 
-From time to time a pull request will become outdated. If this occurs, and
-the pull is no longer automatically mergeable; a comment on the pull will
-be used to issue a warning of closure. The pull will be closed 15 days
-after the warning if action is not taken by the author. Pull requests closed
-in this manner will have their corresponding issue labeled 'stagnant'.
-
-Issues with no commits will be given a similar warning, and closed after
-15 days from their last activity. Issues closed in this manner will be 
-labeled 'stale'.
+* generate and wire in Deadcoin-specific genesis blocks
+* replace placeholder bootstrap discovery with real Deadcoin seed nodes
+* update branding assets and installer resources
+* modernize the dependency/toolchain story so the daemon can build on current systems
