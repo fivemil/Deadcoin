@@ -29,6 +29,7 @@ namespace Checkpoints
         ( 0,     std::make_pair(hashGenesisBlock, 1360105017) )
     ;
 
+    // Deadcoin bootstrap starts without inherited banned blocks.
     static ListBannedBlocks listBanned;
 
     // TestNet has no checkpoints

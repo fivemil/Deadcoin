@@ -970,12 +970,14 @@ void ThreadSocketHandler2(void* parg)
     }
 }
 
+static const char* kBootstrapPlaceholderSeed = "seeds-not-configured.deadcoin.example";
+
 // DNS seeds
 // Each pair gives a source name and a seed name.
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
-    {"bootstrap.deadcoin.invalid", "bootstrap.deadcoin.invalid"},
+    {kBootstrapPlaceholderSeed, kBootstrapPlaceholderSeed},
 };
 
 void ThreadDNSAddressSeed(void* parg)
@@ -1006,7 +1008,7 @@ void ThreadDNSAddressSeed2(void* parg)
 
     if (!fTestNet)
     {
-        if (strcmp(strDNSSeed[0][1], "bootstrap.deadcoin.invalid") == 0)
+        if (strcmp(strDNSSeed[0][1], kBootstrapPlaceholderSeed) == 0)
         {
             printf("No Deadcoin DNS seeds are configured yet; use -addnode/-seednode during bootstrap\n");
             return;
@@ -1050,11 +1052,13 @@ void ThreadDNSAddressSeed2(void* parg)
 
 uint32_t pnSeed[] =
 {
+    // Zero-length arrays are not portable, so keep a single sentinel and skip it.
     0x00000000,
 };
 
 const char* pchTorSeed[] = 
 {
+    // Zero-length arrays are not portable, so keep a single sentinel and skip it.
     ""
 };
 

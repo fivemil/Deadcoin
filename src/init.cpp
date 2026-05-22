@@ -398,6 +398,8 @@ bool AppInit2()
     }
 
     fTestNet = GetBoolArg("-testnet");
+    // Bootstrap isolation: disable automatic peer discovery until Deadcoin seed
+    // infrastructure exists for both mainnet and testnet.
     SoftSetBoolArg("-irc", false);
     SoftSetBoolArg("-dnsseed", false);
 
